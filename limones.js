@@ -1,0 +1,1 @@
+let ctx=document.getElementById("areaJuego").getContext("2d");
