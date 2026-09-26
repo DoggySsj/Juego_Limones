@@ -11,6 +11,7 @@ let limonY=6;
 let puntaje=0;
 let vidas=3;
 let intervaloJuego;
+let juegoPausado=false;
 const ANCHO_LIMON=20;
 const ALTURA_LIMON=20;
 
@@ -68,6 +69,7 @@ function dibujarLimon(){
 
 
 function bajarLimon(){
+    if (!juegoPausado) {
     limonY=limonY+10
     actualizarCanva();
     colision();
@@ -75,6 +77,7 @@ function bajarLimon(){
     detectarVelocidad();
     clearInterval(intervaloJuego);
     intervaloJuego = setInterval(bajarLimon, velocidadCaida);
+    }
 }
 
 function colision(){
@@ -103,6 +106,9 @@ function perderVidas(){
         if (vidas<=0){
             alert("GAME OVER")
             location.reload();
+            juegoPausado = true;
+            clearInterval(intervaloJuego); 
+            
         }
     }
 
@@ -116,7 +122,8 @@ function detectarVelocidad(){
         velocidadCaida=100;
     }else if (puntaje==10){
         alert("ERES EL GANADOR, si la vida te da limones...");
-        location.reload();//preferi colocar esta funcion para recargar la pagina para volver a comenzar el juego y que no se pare
+        juegoPausado = true; 
+        clearInterval(intervaloJuego); 
     }
 
 
