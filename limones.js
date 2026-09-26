@@ -141,3 +141,7 @@ function aparecerLimon(){
     limonY=0;
     actualizarCanva();
 }
+
+function reiniciar(){
+    location.reload();
+}
