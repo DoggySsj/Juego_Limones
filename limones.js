@@ -5,11 +5,12 @@ const ALTURA_PERSONAJE=60;
 const ANCHO_PERSONAJE=40;
 let personajeX=canvas.width/2;
 let personajeY=canvas.height-(ALTURA_SUELO+ALTURA_PERSONAJE);
-let velocidadCaida=100;
+let velocidadCaida=200;
 let limonX=canvas.width/2;
 let limonY=6;
 let puntaje=0;
 let vidas=3;
+let intervaloJuego;
 const ANCHO_LIMON=20;
 const ALTURA_LIMON=20;
 
@@ -26,7 +27,7 @@ function dibujarPersonaje(){
 }
 
 function iniciar(){
-    setInterval(bajarLimon,velocidadCaida);
+    intervaloJuego = setInterval(bajarLimon, velocidadCaida);
     generarAleatorio();
     dibujarSuelo();
     dibujarPersonaje();
@@ -71,6 +72,9 @@ function bajarLimon(){
     actualizarCanva();
     colision();
     perderVidas();
+    detectarVelocidad();
+    clearInterval(intervaloJuego);
+    intervaloJuego = setInterval(bajarLimon, velocidadCaida);
 }
 
 function colision(){
@@ -83,6 +87,8 @@ function colision(){
         puntaje=puntaje+1;
         let componente=document.getElementById("txtPuntaje");
         componente.textContent=puntaje;
+        detectarVelocidad();
+
     }
 
 
@@ -99,6 +105,20 @@ function perderVidas(){
             location.reload();
         }
     }
+
+}
+
+
+function detectarVelocidad(){
+    if(puntaje==3){
+        velocidadCaida=150;
+    } else if (puntaje==6){
+        velocidadCaida=100;
+    }else if (puntaje==10){
+        alert("ERES EL GANADOR, si la vida te da limones...");
+        location.reload();//preferi colocar esta funcion para recargar la pagina para volver a comenzar el juego y que no se pare
+    }
+
 
 }
 
