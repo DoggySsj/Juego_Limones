@@ -91,7 +91,6 @@ function colision(){
         let componente=document.getElementById("txtPuntaje");
         componente.textContent=puntaje;
         detectarVelocidad();
-
     }
 
 
